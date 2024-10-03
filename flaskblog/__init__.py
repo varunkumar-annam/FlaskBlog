@@ -30,7 +30,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 import secrets
-
+from flask_mail import Mail
+import os
 db = SQLAlchemy()
 
 
@@ -47,6 +48,30 @@ bcrypt = Bcrypt(app)
 login_manager=LoginManager(app)
 login_manager.login_view='login'
 login_manager.login_message_category='info'
+
+# app.config['MAIL_SERVER']='smtp.googlemail.com'
+# app.config['MAIL_PORT']=587    ......... this giving error
+# app.config['MAIL_USE_TLS']=True
+# app.config['MAIL_USERNAME']=os.environ.get('MAIL_USER')
+# app.config['MAIL_PASSWORD']=os.environ.get('MAIL_PASS')
+
+
+# app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USERNAME'] = 'avkgoud04@gmail.com'  # Your Gmail address
+# app.config['MAIL_PASSWORD'] = 'owps xxzg foxv wtcc'  # App password or actual password if less secure apps are enabled
+# app.config['MAIL_DEFAULT_SENDER'] = 'avkgoud04@gmail.com'  # Should match MAIL_USERNAME
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False  # Ensure SSL is False when using TLS
+app.config['MAIL_USERNAME'] = 'avkgoud04@gmail.com'  # Your Gmail address
+app.config['MAIL_PASSWORD'] = 'owps xxzg foxv wtcc'  # Use the App Password here
+app.config['MAIL_DEFAULT_SENDER'] = 'avkgoud04@gmail.com'
+
+
+mail=Mail(app)
 
 with app.app_context():
     from flaskblog.models import User,Post  # Import models to ensure they're registered with SQLAlchemy
