@@ -62,6 +62,7 @@ login_manager.login_message_category='info'
 # app.config['MAIL_USERNAME'] = 'avkgoud04@gmail.com'  # Your Gmail address
 # app.config['MAIL_PASSWORD'] = 'owps xxzg foxv wtcc'  # App password or actual password if less secure apps are enabled
 # app.config['MAIL_DEFAULT_SENDER'] = 'avkgoud04@gmail.com'  # Should match MAIL_USERNAME
+
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
@@ -82,9 +83,10 @@ with app.app_context():
 from flaskblog.users.routes import users
 from flaskblog.posts.routes import posts
 from flaskblog.main.routes import main
+from flaskblog.errors.handlers import errors
 
 app.register_blueprint(users)
 app.register_blueprint(posts)
 app.register_blueprint(main)
+app.register_blueprint(errors)
 
-# return app
